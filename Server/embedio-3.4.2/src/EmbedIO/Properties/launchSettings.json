@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "EmbedIO": {
+      "commandName": "Executable"
+    }
+  }
+}
