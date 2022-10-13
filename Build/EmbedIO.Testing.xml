@@ -1,0 +1,355 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EmbedIO.Testing</name>
+    </assembly>
+    <members>
+        <member name="T:EmbedIO.Testing.HttpClientExtensions">
+            <summary>
+            Provides extension methods for <see cref="T:System.Net.Http.HttpClient"/>.
+            </summary>
+        </member>
+        <member name="M:EmbedIO.Testing.HttpClientExtensions.HeadAsync(System.Net.Http.HttpClient,System.String)">
+            <summary>
+            Asynchronously sends a <c>HEAD</c> request to a specified URL.
+            </summary>
+            <param name="this">The <see cref="T:System.Net.Http.HttpClient"/> on which this method is called.</param>
+            <param name="url">The request URL.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> whose result will be a <see cref="T:System.Net.Http.HttpResponseMessage"/>.</returns>
+        </member>
+        <member name="M:EmbedIO.Testing.HttpClientExtensions.OptionsAsync(System.Net.Http.HttpClient,System.String)">
+            <summary>
+            Asynchronously sends an <c>OPTIONS</c> request to a specified URL.
+            </summary>
+            <param name="this">The <see cref="T:System.Net.Http.HttpClient"/> on which this method is called.</param>
+            <param name="url">The request URL.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> whose result will be a <see cref="T:System.Net.Http.HttpResponseMessage"/>.</returns>
+        </member>
+        <member name="T:EmbedIO.Testing.HttpResponseMessageExtensions">
+            <summary>
+            Provides extension methods for <see cref="T:System.Net.Http.HttpResponseMessage"/>
+            and tasks returning instances of <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="M:EmbedIO.Testing.HttpResponseMessageExtensions.ReceiveStringAsync(System.Threading.Tasks.Task{System.Net.Http.HttpResponseMessage})">
+            <summary>
+            Asynchronously gets a HTTP response body as a string.
+            </summary>
+            <param name="this">The <see cref="T:System.Threading.Tasks.Task`1"/> that will return the response.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> whose result will be the response body as a string.</returns>
+        </member>
+        <member name="T:EmbedIO.Testing.ITestWebServer">
+            <summary>
+            Represents an object that can act as a web server, processing requests
+            directed to a fictional base URL.
+            </summary>
+            <seealso cref="T:EmbedIO.IHttpContextHandler" />
+        </member>
+        <member name="P:EmbedIO.Testing.ITestWebServer.BaseUrl">
+            <summary>
+            Gets the base URL simulated by the server.
+            </summary>
+        </member>
+        <member name="T:EmbedIO.Testing.MockFileProvider">
+            <summary>
+            <para>Provides an <see cref="T:EmbedIO.Files.IFileProvider"/> interface
+            that does not interfere with the file system.</para>
+            <para>This class simulates a small file system
+            with a root directory, a subdirectory, HTML index files,
+            and a data file filled with random bytes.</para>
+            </summary>
+            <seealso cref="T:EmbedIO.Files.IFileProvider" />
+        </member>
+        <member name="F:EmbedIO.Testing.MockFileProvider.IndexFileName">
+            <summary>
+            The file name of HTML indexes.
+            </summary>
+        </member>
+        <member name="F:EmbedIO.Testing.MockFileProvider.IndexUrlPath">
+            <summary>
+            The URL path to the HTML index of the root directory.
+            </summary>
+        </member>
+        <member name="F:EmbedIO.Testing.MockFileProvider.SubDirectoryName">
+            <summary>
+            The name of the subdirectory.
+            </summary>
+        </member>
+        <member name="F:EmbedIO.Testing.MockFileProvider.SubDirectoryUrlPath">
+            <summary>
+            The URL path to the subdirectory.
+            </summary>
+        </member>
+        <member name="F:EmbedIO.Testing.MockFileProvider.SubDirectoryIndexUrlPath">
+            <summary>
+            The URL path to the subdirectory HTML index.
+            </summary>
+        </member>
+        <member name="F:EmbedIO.Testing.MockFileProvider.RandomDataUrlPath">
+            <summary>
+            The URL path to a file containing random data.
+            </summary>
+            <seealso cref="M:EmbedIO.Testing.MockFileProvider.GetRandomDataLength"/>
+            <seealso cref="M:EmbedIO.Testing.MockFileProvider.GetRandomData"/>
+            <seealso cref="M:EmbedIO.Testing.MockFileProvider.ChangeRandomData(System.Int32)"/>
+        </member>
+        <member name="M:EmbedIO.Testing.MockFileProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EmbedIO.Testing.MockFileProvider"/> class.
+            </summary>
+        </member>
+        <member name="E:EmbedIO.Testing.MockFileProvider.ResourceChanged">
+            <inheritdoc />
+        </member>
+        <member name="P:EmbedIO.Testing.MockFileProvider.IsImmutable">
+            <inheritdoc />
+        </member>
+        <member name="M:EmbedIO.Testing.MockFileProvider.Start(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:EmbedIO.Testing.MockFileProvider.MapUrlPath(System.String,EmbedIO.IMimeTypeProvider)">
+            <inheritdoc />
+        </member>
+        <member name="M:EmbedIO.Testing.MockFileProvider.OpenFile(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:EmbedIO.Testing.MockFileProvider.GetDirectoryEntries(System.String,EmbedIO.IMimeTypeProvider)">
+            <inheritdoc />
+        </member>
+        <member name="M:EmbedIO.Testing.MockFileProvider.GetRandomDataLength">
+            <summary>
+            Gets the length of the random data file,
+            so it can be compared to the length of returned content.
+            </summary>
+            <returns>The length of the random data file.</returns>
+            <seealso cref="F:EmbedIO.Testing.MockFileProvider.RandomDataUrlPath"/>
+            <seealso cref="M:EmbedIO.Testing.MockFileProvider.GetRandomData"/>
+            <seealso cref="M:EmbedIO.Testing.MockFileProvider.ChangeRandomData(System.Int32)"/>
+        </member>
+        <member name="M:EmbedIO.Testing.MockFileProvider.GetRandomData">
+            <summary>
+            Gets the same random data that should be returned
+            in response to a request for the random data file.
+            </summary>
+            <returns>An array of bytes containing random data.</returns>
+            <seealso cref="M:EmbedIO.Testing.MockFileProvider.GetRandomDataLength"/>
+            <seealso cref="M:EmbedIO.Testing.MockFileProvider.GetRandomData"/>
+            <seealso cref="M:EmbedIO.Testing.MockFileProvider.ChangeRandomData(System.Int32)"/>
+        </member>
+        <member name="M:EmbedIO.Testing.MockFileProvider.ChangeRandomData(System.Int32)">
+            <summary>
+            <para>Creates and returns a new set of random data bytes.</para>
+            <para>After this method returns, requests for the random data file
+            should return the same bytes returned by this method.</para>
+            </summary>
+            <param name="newLength">The length of the new random data.</param>
+            <returns>An array of bytes containing the new random data.</returns>
+        </member>
+        <member name="T:EmbedIO.Testing.MockMimeTypeProvider">
+            <summary>
+            Provides an <see cref="T:EmbedIO.IMimeTypeProvider"/> interface
+            that associates all extensions to <c>application/octet-stream</c>
+            and never suggests any data compression preference.
+            </summary>
+            <seealso cref="T:EmbedIO.IMimeTypeProvider" />
+        </member>
+        <member name="M:EmbedIO.Testing.MockMimeTypeProvider.GetMimeType(System.String)">
+            <inheritdoc />
+            <remarks>
+            <see cref="T:EmbedIO.Testing.MockMimeTypeProvider"/> always returns <see cref="F:EmbedIO.MimeType.Default"/>
+            (<c>application/octet-stream</c>).
+            </remarks>
+        </member>
+        <member name="M:EmbedIO.Testing.MockMimeTypeProvider.TryDetermineCompression(System.String,System.Boolean@)">
+            <inheritdoc />
+            <remarks>
+            <see cref="T:EmbedIO.Testing.MockMimeTypeProvider"/> always sets <paramref name="preferCompression"/>
+            to <see langword="false"/> and returns <see langword="false"/>,
+            </remarks>
+        </member>
+        <member name="T:EmbedIO.Testing.StockResource">
+            <summary>
+            <para>Provides access to standard resources embedded in <c>EmbedIO.Testing.dll</c>.</para>
+            <para>Resources are organized in folders; access to a resource happens in a way
+            similar to URL paths, i.e. using slashes (<c>/</c>) as separators.</para>
+            </summary>
+        </member>
+        <member name="P:EmbedIO.Testing.StockResource.Paths">
+            <summary>
+            Gets an enumeration of paths to all the defined stock resources.
+            </summary>
+        </member>
+        <member name="M:EmbedIO.Testing.StockResource.Exists(System.String)">
+            <summary>
+            Determines whether a stock resource exists.
+            </summary>
+            <param name="path">The path to the resource.</param>
+            <returns><see langword="true"/> if the resource exists;
+            otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:EmbedIO.Testing.StockResource.TryOpen(System.String,System.IO.Stream@)">
+            <summary>
+            Attempts to load a resource.
+            </summary>
+            <param name="path">The path to the resource.</param>
+            <param name="stream">When this method returns <see langword="true"/>,
+            a <see cref="T:System.IO.Stream"/> representing the resource.
+            This parameter is passed uninitialized.</param>
+            <returns><see langword="true"/> if the specified resource
+            has been loaded; otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:EmbedIO.Testing.StockResource.Open(System.String)">
+            <summary>
+            Loads the specified resource.
+            </summary>
+            <param name="path">The path to the resource.</param>
+            <returns>A <see cref="T:System.IO.Stream"/> representing the resource,
+            or <see langword="null"/> if the resource is not found.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="path"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="path"/> is an empty string.</exception>
+            <exception cref="T:System.IO.FileNotFoundException"><paramref name="path"/> is an empty string.</exception>
+        </member>
+        <member name="M:EmbedIO.Testing.StockResource.GetLength(System.String)">
+            <summary>
+            Gets the length of a resource, expressed in bytes.
+            </summary>
+            <param name="path">The path to the resource.</param>
+            <returns>The length of the specified resource.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="path"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="path"/> is an empty string.</exception>
+            <exception cref="T:System.IO.FileNotFoundException"><paramref name="path"/> is an empty string.</exception>
+        </member>
+        <member name="M:EmbedIO.Testing.StockResource.GetBytes(System.String)">
+            <summary>
+            Gets a resource as an array of bytes.
+            </summary>
+            <param name="path">The path to the resource.</param>
+            <returns>An array of bytes containing the resource's contents.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="path"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="path"/> is an empty string.</exception>
+            <exception cref="T:System.IO.FileNotFoundException"><paramref name="path"/> is an empty string.</exception>
+        </member>
+        <member name="M:EmbedIO.Testing.StockResource.GetByteRange(System.String,System.Int32,System.Int32)">
+            <summary>
+            <para>Gets a range of bytes from a resource's contents.</para>
+            <para>The range must be specified the same way as in HTTP <c>Range</c> headers,
+            i.e. with a starting offset and an inclusive upper bound; for example,
+            if <paramref name="start"/>is 200 and <paramref name="upperBound"/> is 299
+            then 100 bytes are returned, starting from the 201st byte (as indexes are 0-based).</para>
+            </summary>
+            <param name="path">The path to the resource.</param>
+            <param name="start">The starting offset of the range to return.</param>
+            <param name="upperBound">The inclusive upper bound of the range to return.</param>
+            <returns>An array of bytes containing the specified range of the resource's contents,
+            or <see langword="null"/> if the range is not valid.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="path"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="path"/> is an empty string.</exception>
+            <exception cref="T:System.IO.FileNotFoundException"><paramref name="path"/> is an empty string.</exception>
+        </member>
+        <member name="M:EmbedIO.Testing.StockResource.GetText(System.String,System.Text.Encoding)">
+            <summary>
+            Gets a resource as text.
+            </summary>
+            <param name="path">The path to the resource.</param>
+            <param name="encoding">The encoding to use to convert the resource's content
+            to a string. If <see langword="null"/> is specified (the default),
+            UTF-8 will be used.</param>
+            <returns>The specified resource as a <see langword="string"/>.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="path"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="path"/> is an empty string.</exception>
+            <exception cref="T:System.IO.FileNotFoundException"><paramref name="path"/> is an empty string.</exception>
+        </member>
+        <member name="T:EmbedIO.Testing.TestHttpClient">
+            <summary>
+            A <see cref="T:System.Net.Http.HttpClient"/> that can send requests
+            either to an <see cref="T:EmbedIO.Testing.ITestWebServer"/> interface,
+            or to a web server on the network.
+            </summary>
+        </member>
+        <member name="P:EmbedIO.Testing.TestHttpClient.CookieContainer">
+            <summary>
+            Gets the cookie container used to store server cookies.
+            </summary>
+        </member>
+        <member name="M:EmbedIO.Testing.TestHttpClient.Create(EmbedIO.Testing.ITestWebServer)">
+            <summary>
+            Creates a test client that communicates with the specified server.
+            </summary>
+            <param name="server">The server.</param>
+            <returns>A newly-created <see cref="T:EmbedIO.Testing.TestHttpClient"/>.</returns>
+            <seealso cref="M:EmbedIO.Testing.TestHttpClient.Create(System.String)"/>
+        </member>
+        <member name="M:EmbedIO.Testing.TestHttpClient.Create(System.String)">
+            <summary>
+            Creates a test client that communicates over the network
+            (typically with a <see cref="T:EmbedIO.WebServer"/>).
+            </summary>
+            <param name="baseUrl">The base URL of the server.</param>
+            <returns>A newly-created <see cref="T:EmbedIO.Testing.TestHttpClient"/>.</returns>
+            <seealso cref="M:EmbedIO.Testing.TestHttpClient.Create(EmbedIO.Testing.ITestWebServer)"/>
+        </member>
+        <member name="T:EmbedIO.Testing.TestWebServer">
+            <summary>
+            <para>A Web server that does not actually communicate over the network;
+            instead, it manages an internal queue of requests that simulate
+            incoming connections.</para>
+            <para>Requests can be forwarded to the server using the <see cref="T:System.Net.Http.HttpClient"/> instance
+            returned by the <see cref="P:EmbedIO.Testing.TestWebServer.Client"/> property.</para>
+            </summary>
+        </member>
+        <member name="F:EmbedIO.Testing.TestWebServer.DefaultBaseUrl">
+            <summary>
+            The base URL that a <see cref="T:EmbedIO.Testing.TestWebServer"/>, by default, simulates being bound to.
+            </summary>
+        </member>
+        <member name="M:EmbedIO.Testing.TestWebServer.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EmbedIO.Testing.TestWebServer"/> class.
+            </summary>
+            <param name="baseUrl"></param>
+        </member>
+        <member name="P:EmbedIO.Testing.TestWebServer.BaseUrl">
+            <summary>
+            <para>Gets a <see cref="T:System.Net.Http.HttpClient"/> that communicates with this server.</para>
+            <para>The returned client is already initialized with a base address,
+            so requests URLs may omit the scheme and host parts.</para>
+            </summary>
+        </member>
+        <member name="P:EmbedIO.Testing.TestWebServer.Client">
+            <summary>
+            <para>Gets a <see cref="T:EmbedIO.Testing.TestHttpClient"/> that communicates with this server.</para>
+            <para>The returned client is already initialized with a base address,
+            so requests URLs may omit the scheme and host parts.</para>
+            </summary>
+        </member>
+        <member name="M:EmbedIO.Testing.TestWebServer.UseAsync(System.Action{EmbedIO.IWebServer},System.Func{System.Net.Http.HttpClient,System.Threading.Tasks.Task})">
+            <summary>
+            Encapsulates the creation and use of a <see cref="T:EmbedIO.Testing.TestWebServer"/>.
+            </summary>
+            <param name="configure">A callback used to configure the server.</param>
+            <param name="use">A callback used to pass requests to the server.</param>
+            <exception cref="T:System.ArgumentNullException">
+            <para><paramref name="configure"/> is <see langword="null"/>.</para>
+            <para>- or -</para>
+            <para><paramref name="use"/> is <see langword="null"/>.</para>
+            </exception>
+        </member>
+        <member name="M:EmbedIO.Testing.TestWebServer.Prepare(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:EmbedIO.Testing.TestWebServer.ProcessRequestsAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:EmbedIO.Testing.TestWebServer.Dispose(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:EmbedIO.Testing.TestWebServer.OnFatalException">
+            <inheritdoc />
+        </member>
+        <member name="T:EmbedIO.Testing.TestWebServerOptions">
+            <summary>
+            Contains options for configuring an instance of <see cref="T:EmbedIO.Testing.TestWebServer"/>.
+            </summary>
+        </member>
+    </members>
+</doc>

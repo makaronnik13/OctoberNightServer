@@ -1,0 +1,5 @@
+﻿[
+{"_id":{"$guid":"2c187518-05d5-474a-8798-31febe80cb48"},"LocationName":"loc1","Position":{"X":36.625176025,"Y":29.131977254},"Owner":{"$id":"13nik@mail.ru","$ref":"Users"},"Events":[{"$id":{"$guid":"dd8743a3-71ff-4158-973e-7f03b0217bf1"},"$ref":"Events"},{"$id":{"$guid":"51ba6ecb-6c5c-415c-9407-38e90c45804c"},"$ref":"Events"}]},
+{"_id":{"$guid":"3fbbadf4-95ee-473b-aef9-121408970ae4"},"LocationName":"gjgj","Position":{"X":36.62640591,"Y":29.135487167},"Owner":{"$id":"13nik@mail.ru","$ref":"Users"},"Events":[{"$id":{"$guid":"0c1a1b87-d4fa-47f4-b8ce-aee0a5e388f2"},"$ref":"Events"}]},
+{"_id":{"$guid":"9a29a78b-9db0-4588-8a6a-77a3ffebd52d"},"LocationName":"loc2","Position":{"X":36.623379292,"Y":29.132600188},"Owner":{"$id":"13nik@mail.ru","$ref":"Users"},"Events":[{"$id":{"$guid":"72b3c2d1-570f-4ee3-9f44-5c5a735a0b86"},"$ref":"Events"},{"$id":{"$guid":"d76271e3-3087-469a-90a6-d97e5e8d2e84"},"$ref":"Events"}]}
+]
